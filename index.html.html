@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>নাফিজের মেস</title>
+<style>
+/* ===== THEMES ===== */
+:root, [data-theme="midnight"]{
+  --bg:#0a0a0f; --bg2:#12121f; --card:rgba(22,22,38,0.7); --card2:rgba(30,30,52,0.6);
+  --bd:rgba(212,175,55,0.25); --bd2:rgba(212,175,55,0.5);
+  --ac:#d4af37; --ac2:#f4e4bc; --ac3:#b8860b;
+  --plat:#e5e5e5; --dim:#8a8a9a;
+  --ok:#22c55e; --bad:#ef4444; --info:#38bdf8;
+  --grad:linear-gradient(135deg,#f4e4bc,#d4af37,#b8860b,#d4af37,#f4e4bc);
+  --grad-solid:linear-gradient(135deg,#f4e4bc,#d4af37,#b8860b);
+}
+[data-theme="emerald"]{
+  --bg:#04120b; --bg2:#0a1f14; --card:rgba(10,31,20,0.7); --card2:rgba(15,45,28,0.6);
+  --bd:rgba(16,185,129,0.25); --bd2:rgba(16,185,129,0.5);
+  --ac:#10b981; --ac2:#6ee7b7; --ac3:#047857;
+  --plat:#e0f2e9; --dim:#6b8a7a;
+  --ok:#22c55e; --bad:#ef4444; --info:#38bdf8;
+  --grad:linear-gradient(135deg,#6ee7b7,#10b981,#047857,#10b981,#6ee7b7);
+  --grad-solid:linear-gradient(135deg,#6ee7b7,#10b981,#047857);
+}
+[data-theme="royal"]{
+  --bg:#0d0618; --bg2:#1a0f2e; --card:rgba(26,15,46,0.7); --card2:rgba(40,20,70,0.6);
+  --bd:rgba(168,85,247,0.25); --bd2:rgba(168,85,247,0.5);
+  --ac:#a855f7; --ac2:#e9d5ff; --ac3:#7c3aed;
+  --plat:#f0e6ff; --dim:#8a7a9a;
+  --ok:#22c55e; --bad:#ef4444; --info:#38bdf8;
+  --grad:linear-gradient(135deg,#e9d5ff,#a855f7,#7c3aed,#a855f7,#e9d5ff);
+  --grad-solid:linear-gradient(135deg,#e9d5ff,#a855f7,#7c3aed);
+}
+[data-theme="ocean"]{
+  --bg:#030812; --bg2:#0a1428; --card:rgba(10,20,40,0.7); --card2:rgba(15,30,60,0.6);
+  --bd:rgba(56,189,248,0.25); --bd2:rgba(56,189,248,0.5);
+  --ac:#38bdf8; --ac2:#bae6fd; --ac3:#0284c7;
+  --plat:#e0f2fe; --dim:#6b8a9a;
+  --ok:#22c55e; --bad:#ef4444; --info:#38bdf8;
+  --grad:linear-gradient(135deg,#bae6fd,#38bdf8,#0284c7,#38bdf8,#bae6fd);
+  --grad-solid:linear-gradient(135deg,#bae6fd,#38bdf8,#0284c7);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI','SolaimanLipi','Kalpurush',sans-serif;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow-x:hidden}
+body{background:var(--bg);color:var(--plat);font-size:14px;line-height:1.5;transition:background .5s,color .5s}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(circle at 20% 10%,rgba(212,175,55,0.06),transparent 50%),radial-gradient(circle at 80% 90%,rgba(74,26,107,0.08),transparent 50%);pointer-events:none;z-index:0;transition:opacity .5s}
+
+/* ENTRY */
+#entry{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(ellipse at 50% 40%,var(--bg2) 0%,var(--bg) 70%);overflow:hidden;transition:opacity 1s,transform 1s}
+#entry.hide{opacity:0;transform:scale(1.08);pointer-events:none}
+.entry-glow{position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(212,175,55,0.15),transparent 70%);animation:glowPulse 4s ease-in-out infinite;filter:blur(40px)}
+@keyframes glowPulse{0%,100%{transform:scale(1);opacity:.6}50%{transform:scale(1.3);opacity:1}}
+.entry-content{position:relative;z-index:2;text-align:center;padding:32px 24px;animation:fadeUp 1.2s ease-out;max-width:400px;width:100%}
+@keyframes fadeUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+.entry-icon{font-size:72px;margin-bottom:16px;filter:drop-shadow(0 0 30px var(--ac));animation:floatY 3s ease-in-out infinite}
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.entry-title{font-family:Georgia,'Times New Roman',serif;font-size:42px;font-weight:700;letter-spacing:1px;background:var(--grad);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shine 4s linear infinite;filter:drop-shadow(0 0 20px var(--ac));margin-bottom:8px;line-height:1.1}
+@keyframes shine{to{background-position:200% center}}
+.entry-sub{color:var(--dim);font-size:11px;letter-spacing:6px;text-transform:uppercase;margin-bottom:32px}
+.entry-div{display:flex;align-items:center;gap:12px;margin-bottom:32px}
+.entry-div::before,.entry-div::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--ac),transparent)}
+.entry-div span{color:var(--ac);font-size:14px}
+.entry-form{display:flex;flex-direction:column;gap:16px;text-align:left}
+.entry-form label{font-size:10px;color:var(--ac);letter-spacing:2px;text-transform:uppercase;font-weight:600;padding-left:4px;margin-bottom:-8px}
+.entry-form input{width:100%;padding:15px 18px;background:rgba(18,18,31,0.8);border:1px solid var(--bd);border-radius:14px;color:var(--plat);font-size:15px;transition:all .3s;backdrop-filter:blur(10px)}
+.entry-form input:focus{outline:none;border-color:var(--ac);box-shadow:0 0 0 3px rgba(212,175,55,0.15),0 0 30px rgba(212,175,55,0.2)}
+.btn-enter{padding:17px;border:none;border-radius:14px;background:var(--grad);background-size:200% auto;color:#1a1408;font-weight:800;font-size:15px;letter-spacing:3px;cursor:pointer;animation:shine 3s linear infinite;box-shadow:0 10px 40px rgba(212,175,55,0.35),inset 0 0 20px rgba(255,255,255,0.3);text-transform:uppercase;margin-top:12px;transition:transform .2s}
+.btn-enter:active{transform:scale(.97)}
+
+/* APP */
+#app{display:none;min-height:100vh;padding-bottom:40px;position:relative;z-index:1}
+#app.show{display:block;animation:fadeIn .6s}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.app-header{position:sticky;top:0;z-index:50;background:rgba(10,10,15,0.85);backdrop-filter:blur(20px);padding:14px 16px 10px;border-bottom:1px solid var(--bd);box-shadow:0 4px 30px rgba(0,0,0,0.5)}
+.header-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.header-title{font-family:Georgia,serif;font-size:20px;font-weight:700;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.header-manager{font-size:10px;color:var(--dim);letter-spacing:1px;margin-top:2px}
+.header-month{background:rgba(212,175,55,0.15);border:1px solid var(--bd2);padding:7px 14px;border-radius:20px;font-size:11px;color:var(--ac);font-weight:700;letter-spacing:1px;cursor:pointer}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex-shrink:0;padding:8px 14px;border-radius:20px;background:rgba(30,30,52,0.6);border:1px solid var(--bd);color:var(--dim);font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;transition:all .3s;letter-spacing:.3px}
+.tab.active{background:var(--grad-solid);color:#1a1408;border-color:transparent;box-shadow:0 4px 20px rgba(212,175,55,0.4);font-weight:800}
+.container{padding:16px;max-width:820px;margin:0 auto}
+.section{display:none}
+.section.active{display:block;animation:slideIn .35s ease-out}
+@keyframes slideIn{from{opacity:0;transform:translateX(-12px)}to{opacity:1;transform:translateX(0)}}
+
+/* CARDS */
+.card{background:linear-gradient(135deg,var(--card),var(--card2));border:1px solid var(--bd);border-radius:18px;padding:18px;margin-bottom:16px;box-shadow:0 12px 40px rgba(0,0,0,0.4),inset 0 1px 0 rgba(255,255,255,0.05);backdrop-filter:blur(20px);position:relative;overflow:hidden;transition:all .3s}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--ac),transparent);opacity:.7}
+.card-title{font-family:Georgia,serif;font-size:14px;font-weight:700;margin-bottom:14px;color:var(--ac2);letter-spacing:.5px;display:flex;justify-content:space-between;align-items:center}
+
+/* FORMS */
+.form-group{margin-bottom:12px}
+.form-group label{display:block;font-size:10px;color:var(--ac);margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:12px 14px;background:rgba(10,10,15,0.6);border:1px solid var(--bd);border-radius:12px;color:var(--plat);font-size:14px;transition:all .3s}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--ac);box-shadow:0 0 0 3px rgba(212,175,55,0.1),0 0 20px rgba(212,175,55,0.15)}
+.form-group select option{background:var(--bg2);color:var(--plat)}
+.form-row{display:flex;gap:8px;align-items:center}
+.form-row .form-group{flex:1;margin-bottom:0}
+.radio-group{display:flex;gap:8px;flex-wrap:wrap}
+.radio-opt{flex:1;min-width:80px;padding:10px;border:1px solid var(--bd);border-radius:10px;background:rgba(10,10,15,0.6);color:var(--dim);font-size:12px;font-weight:600;cursor:pointer;text-align:center;transition:all .2s}
+.radio-opt.active{background:rgba(212,175,55,0.2);border-color:var(--ac);color:var(--ac2);box-shadow:0 0 15px rgba(212,175,55,0.2)}
+.radio-opt input{display:none}
+
+/* BUTTONS */
+.btn{padding:12px 20px;border:none;border-radius:12px;background:var(--grad-solid);background-size:200% auto;color:#1a1408;font-weight:800;font-size:13px;cursor:pointer;transition:all .3s;letter-spacing:1px;box-shadow:0 4px 15px rgba(212,175,55,0.3)}
+.btn:hover{background-position:right center;box-shadow:0 6px 25px rgba(212,175,55,0.5)}
+.btn:active{transform:scale(.97)}
+.btn-sec{background:rgba(30,30,52,0.8);color:var(--ac2);border:1px solid var(--bd2);box-shadow:none}
+.btn-sec:hover{background:rgba(40,40,68,0.9);box-shadow:0 0 20px rgba(212,175,55,0.2)}
+.btn-danger{background:linear-gradient(135deg,#ef4444,#b91c1c);color:#fff;box-shadow:0 4px 15px rgba(239,68,68,0.3)}
+.btn-sm{padding:7px 12px;font-size:11px;border-radius:8px;letter-spacing:.5px}
+.btn-full{width:100%}
+.row{display:flex;gap:10px}
+.row>*{flex:1}
+
+/* LISTS */
+.list-item{background:rgba(18,18,31,0.6);border:1px solid rgba(212,175,55,0.12);border-radius:14px;padding:14px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;gap:10px;transition:all .3s;position:relative;overflow:hidden}
+.list-item::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--ac2),var(--ac3))}
+.list-item:hover{border-color:var(--bd2);box-shadow:0 6px 25px rgba(212,175,55,0.1);transform:translateY(-1px)}
+.list-main{flex:1;min-width:0;padding-left:8px}
+.list-title{font-weight:700;font-size:14px;margin-bottom:3px;color:var(--plat)}
+.list-meta{font-size:11px;color:var(--dim);letter-spacing:.3px}
+.tag{display:inline-block;padding:2px 8px;border-radius:6px;font-size:9px;font-weight:800;letter-spacing:.5px;margin-right:4px}
+.tag-fund{background:rgba(34,197,94,0.2);color:#6ee7b7;border:1px solid rgba(34,197,94,0.4)}
+.tag-pocket{background:rgba(56,189,248,0.2);color:#7dd3fc;border:1px solid rgba(56,189,248,0.4)}
+
+/* STATS */
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.stat-card{background:linear-gradient(135deg,rgba(22,22,38,0.8),rgba(30,30,52,0.6));border:1px solid var(--bd);border-radius:16px;padding:16px;position:relative;overflow:hidden;backdrop-filter:blur(20px);box-shadow:0 8px 30px rgba(0,0,0,0.4)}
+.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--ac2),var(--ac),var(--ac3))}
+.stat-icon{font-size:18px;margin-bottom:6px;opacity:.9}
+.stat-value{font-family:Georgia,serif;font-size:24px;font-weight:700;color:var(--ac);text-shadow:0 0 20px rgba(212,175,55,0.4);letter-spacing:.5px}
+.stat-label{font-size:10px;color:var(--dim);margin-top:4px;text-transform:uppercase;letter-spacing:1.5px;font-weight:600}
+
+/* DATE */
+.date-picker-row{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.date-picker-row input[type=date]{flex:1;padding:12px 14px;background:rgba(10,10,15,0.6);border:1px solid var(--bd);border-radius:12px;color:var(--plat);font-size:14px}
+.date-picker-row input[type=date]:focus{outline:none;border-color:var(--ac)}
+
+/* MEALS */
+.meal-selectall{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;padding:10px;background:rgba(10,10,15,0.4);border-radius:12px;border:1px dashed var(--bd)}
+.meal-selectall button{flex:1;min-width:80px;padding:8px 6px;font-size:11px;border-radius:8px;background:rgba(30,30,52,0.8);border:1px solid var(--bd);color:var(--ac2);font-weight:700;cursor:pointer;transition:all .2s;letter-spacing:.3px}
+.meal-selectall button:hover{background:rgba(212,175,55,0.15);border-color:var(--ac);color:var(--ac)}
+.meal-selectall button:active{transform:scale(.96)}
+.meal-row{display:flex;align-items:center;gap:8px;padding:12px;background:rgba(18,18,31,0.6);border:1px solid rgba(212,175,55,0.12);border-radius:14px;margin-bottom:8px;flex-wrap:wrap;transition:all .2s}
+.meal-row:hover{border-color:var(--bd)}
+.meal-name{flex:1;min-width:80px;font-weight:700;font-size:13px;color:var(--plat)}
+.meal-togs{display:flex;gap:5px}
+.meal-tog{width:40px;height:40px;border-radius:12px;border:1px solid var(--bd);background:rgba(10,10,15,0.6);color:var(--dim);font-size:13px;font-weight:800;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;flex-direction:column;line-height:1;padding:0}
+.meal-tog .ml{font-size:7px;opacity:.6;letter-spacing:.5px;margin-bottom:1px}
+.meal-tog.on{background:linear-gradient(135deg,#22c55e,#15803d);color:#fff;border-color:#22c55e;box-shadow:0 0 15px rgba(34,197,94,0.5)}
+.meal-tog.half{background:var(--grad-solid);color:#1a1408;border-color:var(--ac);box-shadow:0 0 15px rgba(212,175,55,0.5)}
+.meal-tog.double{background:linear-gradient(135deg,#ff6b00,#b45309);color:#fff;border-color:#ff6b00;box-shadow:0 0 15px rgba(255,107,0,0.5)}
+.meal-off-btn{padding:6px 10px;border-radius:8px;background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.4);color:#fca5a5;font-size:10px;font-weight:700;cursor:pointer;transition:all .2s}
+.meal-off-btn:hover{background:rgba(239,68,68,0.3)}
+.meal-guest{display:flex;align-items:center;gap:6px;background:rgba(74,26,107,0.2);border:1px solid rgba(74,26,107,0.5);padding:6px 10px;border-radius:10px;font-size:11px;color:var(--ac2)}
+.meal-guest input{width:42px;padding:4px;text-align:center;background:transparent;border:none;color:var(--ac);font-weight:800;font-size:14px}
+.meal-guest input:focus{outline:none}
+
+/* BALANCE */
+.bal-row{display:flex;justify-content:space-between;padding:12px 14px;border-radius:12px;margin-bottom:8px;font-weight:700;font-size:13px;align-items:center;gap:10px;transition:all .2s}
+.bal-pos{background:linear-gradient(135deg,rgba(34,197,94,0.15),rgba(34,197,94,0.05));color:#6ee7b7;border:1px solid rgba(34,197,94,0.35)}
+.bal-neg{background:linear-gradient(135deg,rgba(239,68,68,0.15),rgba(239,68,68,0.05));color:#fca5a5;border:1px solid rgba(239,68,68,0.35)}
+.bal-zero{background:rgba(136,136,154,0.08);color:var(--dim);border:1px solid var(--bd)}
+
+/* SETTLE */
+.settle-row{display:flex;justify-content:space-between;align-items:center;padding:14px;background:linear-gradient(135deg,rgba(56,189,248,0.1),rgba(56,189,248,0.03));border:1px solid rgba(56,189,248,0.35);border-radius:12px;margin-bottom:8px;font-size:13px;transition:all .2s}
+.settle-row:hover{box-shadow:0 0 20px rgba(56,189,248,0.2)}
+.settle-amt{color:var(--ac);font-weight:900;font-size:15px;font-family:Georgia,serif}
+
+/* EMPTY */
+.empty{text-align:center;padding:36px 20px;color:var(--dim);font-size:13px;line-height:1.7}
+.empty-i{font-size:48px;margin-bottom:12px;opacity:.4}
+
+/* DETAIL ROWS */
+.detail-row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px dashed rgba(212,175,55,0.15);font-size:12px;align-items:center;gap:10px}
+.detail-row:last-child{border-bottom:none}
+.detail-label{color:var(--dim);letter-spacing:.3px}
+.detail-value{font-weight:700;color:var(--plat);text-align:right}
+.rot-badge{display:inline-block;padding:2px 7px;border-radius:6px;background:var(--grad-solid);color:#1a1408;font-size:9px;font-weight:800;margin-left:5px;letter-spacing:.5px;box-shadow:0 0 10px rgba(212,175,55,0.4)}
+
+/* FUND */
+.fund-card{background:linear-gradient(135deg,rgba(212,175,55,0.12),rgba(74,26,107,0.12));border:1px solid var(--bd2);border-radius:18px;padding:20px;margin-bottom:16px;position:relative;overflow:hidden;box-shadow:0 12px 40px rgba(212,175,55,0.15)}
+.fund-card::before{content:'';position:absolute;top:-50%;right:-20%;width:200px;height:200px;background:radial-gradient(circle,rgba(212,175,55,0.2),transparent 70%);border-radius:50%;filter:blur(20px)}
+.fund-label{font-size:11px;color:var(--ac);letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:8px;position:relative}
+.fund-amount{font-family:Georgia,serif;font-size:32px;font-weight:700;color:var(--ac);text-shadow:0 0 30px rgba(212,175,55,0.5);letter-spacing:1px;position:relative}
+.fund-status{margin-top:8px;font-size:12px;font-weight:700;position:relative;letter-spacing:.5px}
+.fund-ok{color:#6ee7b7}
+.fund-warn{color:#fbbf24}
+.fund-bad{color:#fca5a5;animation:shake .5s ease-in-out infinite}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-3px)}75%{transform:translateX(3px)}}
+
+/* WARN */
+.warn-banner{background:linear-gradient(135deg,rgba(239,68,68,0.2),rgba(239,68,68,0.08));border:1px solid rgba(239,68,68,0.5);border-radius:14px;padding:14px 16px;margin-bottom:16px;display:flex;align-items:center;gap:12px;font-size:13px;color:#fca5a5;font-weight:700;animation:shake .6s ease-in-out}
+.warn-banner .wi{font-size:22px}
+
+/* THEME PICKER */
+.theme-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.theme-opt{padding:14px;border-radius:14px;border:2px solid var(--bd);cursor:pointer;transition:all .3s;text-align:center;position:relative;overflow:hidden}
+.theme-opt.active{border-color:var(--ac);box-shadow:0 0 25px rgba(212,175,55,0.4)}
+.theme-opt .to-name{font-size:12px;font-weight:800;margin-top:8px;letter-spacing:.5px}
+.theme-opt .to-swatch{height:36px;border-radius:8px;margin-bottom:8px;display:flex;overflow:hidden}
+.theme-opt .to-swatch div{flex:1}
+.to-midnight{background:linear-gradient(90deg,#0a0a0f,#d4af37,#f4e4bc)}
+.to-emerald{background:linear-gradient(90deg,#04120b,#10b981,#6ee7b7)}
+.to-royal{background:linear-gradient(90deg,#0d0618,#a855f7,#e9d5ff)}
+.to-ocean{background:linear-gradient(90deg,#030812,#38bdf8,#bae6fd)}
+
+/* TOAST */
+#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(120px);background:var(--grad-solid);color:#1a1408;padding:14px 28px;border-radius:30px;font-weight:800;font-size:13px;z-index:999;transition:transform .4s cubic-bezier(.34,1.56,.64,1);box-shadow:0 10px 40px rgba(212,175,55,0.5);white-space:nowrap;letter-spacing:.5px}
+#toast.show{transform:translateX(-50%) translateY(0)}
+
+.footer-badge{text-align:center;padding:24px 16px;color:var(--dim);font-size:10px;letter-spacing:4px;text-transform:uppercase}
+
+@media print{
+  body{background:#fff;color:#000}
+  #entry,.app-header,.tabs,.footer-badge,#toast,.btn,.meal-selectall,.date-picker-row{display:none!important}
+  .card{border:1px solid #ccc;background:#fff;box-shadow:none;break-inside:avoid;page-break-inside:avoid}
+  .card::before{display:none}
+  .stat-value,.fund-amount,.card-title,.detail-value{color:#000!important;text-shadow:none!important;background:none!important;-webkit-text-fill-color:#000!important}
+  .detail-label,.stat-label,.list-meta{color:#555}
+  .section{display:block!important;page-break-after:always}
+  .section:last-child{page-break-after:auto}
+  body::before{display:none}
+  .fund-card,.warn-banner,.settle-row,.bal-row{border:1px solid #ccc;background:#f9f9f9}
+}
+
+#pdfModal{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);padding:20px;overflow-y:auto}
+#pdfModal.show{display:block;animation:fadeIn .3s}
+.pdf-box{max-width:700px;margin:0 auto;background:var(--bg2);border:1px solid var(--bd2);border-radius:18px;padding:24px;box-shadow:0 20px 60px rgba(0,0,0,0.8)}
+.pdf-box h3{font-family:Georgia,serif;color:var(--ac);margin-bottom:16px;font-size:18px}
+.pdf-box .row{margin-top:16px}
+</style>
+</head>
+<body data-theme="midnight">
+
+<div id="entry">
+  <div class="entry-glow"></div>
+  <div class="entry-content">
+    <div class="entry-icon">🍛</div>
+    <h1 class="entry-title">নাফিজের মেস</h1>
+    <p class="entry-sub">Meal • Bazar • Hisab</p>
+    <div class="entry-div"><span>✦</span></div>
+    <div class="entry-form">
+      <label>ম্যানেজারের নাম</label>
+      <input id="inpManager" placeholder="আপনার নাম লিখুন" maxlength="20">
+      <label>মাস</label>
+      <input id="inpMonth" type="month">
+      <button class="btn-enter" onclick="enterApp()">প্রবেশ করুন</button>
+    </div>
+  </div>
+</div>
+
+<div id="app">
+  <div class="app-header">
+    <div class="header-top">
+      <div>
+        <div class="header-title">🍛 নাফিজের মেস</div>
+        <div class="header-manager" id="hdManager">-</div>
+      </div>
+      <div class="header-month" id="hdMonth">-</div>
+    </div>
+    <div class="tabs">
+      <button class="tab active" data-tab="dash">ড্যাশবোর্ড</button>
+      <button class="tab" data-tab="members">সদস্য</button>
+      <button class="tab" data-tab="deposit">জমা</button>
+      <button class="tab" data-tab="meals">মিল</button>
+      <button class="tab" data-tab="bazar">বাজার</button>
+      <button class="tab" data-tab="cleaning">পরিষ্কার</button>
+      <button class="tab" data-tab="other">খরচ</button>
+      <button class="tab" data-tab="khala">খালার বিল</button>
+      <button class="tab" data-tab="fines">জরিমানা</button>
+      <button class="tab" data-tab="notes">নোট</button>
+      <button class="tab" data-tab="calc">হিসাব</button>
+      <button class="tab" data-tab="settings">সেটিংস</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="section active" id="sec-dash">
+      <div id="warnArea"></div>
+      <div class="stat-grid">
+        <div class="stat-card"><div class="stat-icon">🛒</div><div class="stat-value" id="sBazar">০</div><div class="stat-label">মোট বাজার</div></div>
+        <div class="stat-card"><div class="stat-icon">💡</div><div class="stat-value" id="sOther">০</div><div class="stat-label">অন্যান্য খরচ</div></div>
+        <div class="stat-card"><div class="stat-icon">🍽️</div><div class="stat-value" id="sMeal">০</div><div class="stat-label">বিলযোগ্য মিল</div></div>
+        <div class="stat-card"><div class="stat-icon">📊</div><div class="stat-value" id="sRate">০</div><div class="stat-label">মিল রেট</div></div>
+      </div>
+      <div class="fund-card">
+        <div class="fund-label">💰 মেস ফান্ড ব্যালেন্স</div>
+        <div class="fund-amount" id="sFund">০ ৳</div>
+        <div class="fund-status" id="fundStatus"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">🎯 দ্রুত কাজ</div>
+        <div class="row" style="margin-bottom:10px">
+          <button class="btn btn-sec" onclick="goTab('meals')">🍽️ মিল এন্ট্রি</button>
+          <button class="btn btn-sec" onclick="goTab('bazar')">🛒 বাজার</button>
+        </div>
+        <div class="row" style="margin-bottom:10px">
+          <button class="btn btn-sec" onclick="goTab('deposit')">💵 জমা দিন</button>
+          <button class="btn btn-sec" onclick="goTab('calc')">📊 হিসাব</button>
+        </div>
+        <button class="btn btn-full" onclick="openPdf()">📄 PDF রিপোর্ট</button>
+      </div>
+      <div class="card">
+        <div class="card-title">🔄 আজকের পালা</div>
+        <div id="rotationInfo"></div>
+      </div>
+    </div>
+
+    <div class="section" id="sec-members">
+      <div class="card">
+        <div class="card-title">➕ নতুন সদস্য</div>
+        <div class="form-group"><label>নাম</label><input id="mName" placeholder="সদস্যের নাম"></div>
+        <div class="form-group"><label>ফিক্সড মিল (ঐচ্ছিক)</label><input id="mFixed" type="number" step="0.5" placeholder="যেমন: 40"></div>
+        <button class="btn btn-full" onclick="addMember()">সদস্য যোগ করুন</button>
+      </div>
+      <div class="card">
+        <div class="card-title">👥 সদস্য তালিকা (<span id="mCount">০</span>)</div>
+        <div id="membersList"></div>
+      </div>
+    </div>
+
+    <div class="section" id="sec-deposit">
+      <div class="card">
+        <div class="card-title">⚙️ মাসিক জমার হার</div>
+        <div class="form-group"><label>প্রতি সদস্যকে কত টাকা জমা দিতে হবে</label><input id="depositTarget" type="number" placeholder="৳"></div>
+        <button class="btn btn-full" onclick="saveDepositTarget()">সেট করুন</button>
+      </div>
+      <div class="card">
+        <div class="card-title">💵 জমা এন্ট্রি</div>
+        <div class="form-group"><label>সদস্য</label><select id="dMember"></select></div>
+        <div class="form-group"><label>টাকার পরিমাণ</label><input id="dAmount" type="number" placeholder="৳"></div>
+        <div class="form-group"><label>তারিখ</label><input id="dDate" type="date"></div>
+        <button class="btn btn-full" onclick="addDeposit()">জমা যোগ করুন</button>
+      </div>
+      <div class="card">
+        <div class="card-title">📋 জমার তালিকা</div>
+        <div id="depositList"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">✅ কে দিয়েছে / দেয়নি</div>
+        <div id="depositStatus"></div>
+      </div>
+    </div>
+
+    <div class="section" id="sec-meals">
+      <div class="card">
+        <div class="card-title">🍽️ মিল এন্ট্রি</div>
+        <div class="date-picker-row"><input type="date" id="mealDate" onchange="renderMeals()"></div>
+        <div class="meal-selectall">
+          <button onclick="selectAllMeal('s')">সব সকাল</button>
+          <button onclick="selectAllMeal('d')">সব দুপুর</button>
+          <button onclick="selectAllMeal('r')">সব রাত</button>
+          <button onclick="selectAllMeal('all')">সব ৩ বেলা</button>
+          <button onclick="allDayOff()" style="border-color:rgba(239,68,68,0.5);color:#fca5a5">সারাদিন off</button>
+        </div>
+        <div class="list-meta" style="margin-bottom:10px;text-align:center;font-size:11px">টিক: ০ → ১ → ০.৫ → ২ → ০</div>
+        <div id="mealsList"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">📊 এই মাসের মোট মিল</div>
+        <div id="mealSummary"></div>
+      </div>
+    </div>
+
+    <div class="section" id="sec-bazar">
+      <div class="card">
+        <div class="card-title">🛒 বাজার যোগ করুন</div>
+        <div class="form-group"><label>কে করল</label><select id="bMember"></select></div>
+        <div class="form-group"><label>তারিখ</label><input id="bDate" type="date"></div>
+        <div class="form-group"><label>টাকার পরিমাণ</label><input id="bAmount" type="number" placeholder="৳"></div>
+        <div class="form-group"><label>কী কী কিনল</label><input id="bItems" placeholder="চাল, মাছ, তেল..."></div>
+        <div class="form-group"><label>টাকার উৎস</label>
+          <div class="radio-group">
+            <div class="radio-opt active" onclick="setSource(this,'bSource','fund')">মেস ফান্ড</div>
+            <div class="radio-opt" onclick="setSource(this,'bSource','pocket')">নিজের পকেট</div>
+          </div>
+          <input type="hidden" id="bSource" value="fund">
+        </div>
+        <button class="btn btn-full" onclick="addBazar()">যোগ করুন</button>
+      </div>
+      <div class="card">
+        <div class="card-title">🔄 বাজারের রোটেশন</div>
+        <div id="bazarRotation"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">📋 বাজারের তালিকা</div>
+        <div id="bazarList"></div>
+      </div>
+    </div>
+
+    <div class="section" id="sec-cleaning">
+      <div class="card">
+        <div class="card-title">🧹 পরিষ্কার এন্ট্রি</div>
+        <div class="form-group"><label>কী পরিষ্কার</label>
+          <select id="cType"><option value="বাথরুম">বাথরুম</option><option value="রান্নাঘর">রান্নাঘর</option><option value="কমন রুম">কমন রুম</option><option value="বারান্দা">বারান্দা</option></select>
+        </div>
+        <div class="form-group"><label>কে করল</label><select id="cMember"></select></div>
+        <div class="form-group"><label>তারিখ</label><input id="cDate" type="date"></div>
+        <button class="btn btn-full" onclick="addCleaning()">যোগ করুন</button>
+      </div>
+      <div class="card">
+        <div class="card-title">🔄 পরিষ্কারের রোটেশন</div>
+        <div id="cleanRot"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">📋 পরিষ্কারের তালিকা</div>
+        <div id="cleaningList"></div>
+      </div>
+    </div>
+
+    <div class="section" id="sec-other">
+      <div class="card">
+        <div class="card-title">💡 খরচ যোগ করুন</div>
+        <div class="form-group"><label>খরচের ধরন</label>
+          <select id="oType">
+            <option value="other">অন্যান্য</option>
+            <option value="internet">🌐 ইন্টারনেট</option>
+            <option value="gas">🔥 গ্যাস</option>
+            <option value="electricity">⚡ বিদ্যুৎ</option>
+            <option value="water">💧 পানি</option>
+          </select>
+        </div>
+        <div class="form-group"><label>খরচের নাম</label><input id="oName" placeholder="বিবরণ"></div>
+        <div class="form-group"><label>টাকার পরিমাণ</label><input id="oAmount" type="number" placeholder="৳"></div>
+        <div class="form-group"><label>তারিখ</label><input id="oDate" type="date"></div>
+        <div class="form-group"><label>টাকার উৎস</label>
+          <div class="radio-group">
+            <div class="radio-opt active" onclick="setSource(this,'oSource','fund')">মেস ফান্ড</div>
+            <div class="radio-opt" onclick="setSource(this,'oSource','pocket')">নিজের পকেট</div>
+          </div>
+          <input type="hidden" id="oSource" value="fund">
+        </div>
+        <div class="form-group" id="oPocketBy" style="display:none"><label>কে দিল</label><select id="oPaidBy"></select></div>
+        <button class="btn btn-full" onclick="addOther()">যোগ করুন</button>
+      </div>
+      <div class="card">
+        <div class="card-title">📋 খরচের তালিকা</div>
+        <div id="otherList"></div>
+      </div>
+    </div>
+
+    <div class="section" id="sec-khala">
+      <div class="card">
+        <div class="card-title">👩‍🍳 খালার বিল</div>
+        <div class="form-group"><label>তারিখ</label><input id="kDate" type="date"></div>
+        <div class="form-group"><label>টাকার পরিমাণ</label><input id="kAmount" type="number" placeholder="৳"></div>
+        <div class="form-group"><label>টাকার উৎস</label>
+          <div class="radio-group">
+            <div class="radio-opt active" onclick="setSource(this,'kSource','fund')">মেস ফান্ড</div>
+            <div class="radio-opt" onclick="setSource(this,'kSource','pocket')">নিজের পকেট</div>
+          </div>
+          <input type="hidden" id="kSource" value="fund">
+        </div>
+        <div class="form-group" id="kPocketBy" style="display:none"><label>কে দিল</label><select id="kPaidBy"></select></div>
+        <button class="btn btn-full" onclick="addKhala()">যোগ করুন</button>
+      </div>
+      <div class="card">
+        <div class="card-title">📋 খালার বিলের তালিকা</div>
+        <div id="khalaList"></div>
+      </div>
+    </div>
+
+    <div class="section" id="sec-fines">
+      <div class="card">
+        <div class="card-title">⚠️ জরিমানা যোগ করুন</div>
+        <div class="form-group"><label>সদস্য</label><select id="fMember"></select></div>
+        <div class="form-group"><label>টাকার পরিমাণ</label><input id="fAmount" type="number" placeholder="৳"></div>
+        <div class="form-group"><label>কারণ</label><input id="fReason" placeholder="খেতে আসেনি..."></div>
+        <div class="form-group"><label>কোথায় যাবে</label>
+          <select id="fMode"><option value="fund">মেস ফান্ডে</option><option value="meal">মিল পুলে (রেট কমবে)</option></select>
+        </div>
+        <button class="btn btn-full" onclick="addFine()">যোগ করুন</button>
+      </div>
+      <div class="card">
+        <div class="card-title">📋 জরিমানার তালিকা</div>
+        <div id="finesList"></div>
+      </div>
+    </div>
+
+    <div class="section" id="sec-notes">
+      <div class="card">
+        <div class="card-title">📝 ম্যানেজার নোট</div>
+        <div class="form-group"><textarea id="noteText" rows="5" placeholder="মেসের গুরুত্বপূর্ণ নোট লিখুন..."></textarea></div>
+        <button class="btn btn-full" onclick="saveNote()">নোট সেভ করুন</button>
+      </div>
+      <div class="card">
+        <div class="card-title">📋 সেভ করা নোট</div>
+        <div id="notesList"></div>
+      </div>
+    </div>
+
+    <div class="section" id="sec-calc">
+      <div class="card">
+        <div class="card-title">📊 মাসিক সারসংক্ষেপ</div>
+        <div id="calcSummary"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">👥 প্রতি সদস্যের হিসাব</div>
+        <div id="calcMembers"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">💸 কে কাকে কত দেবে</div>
+        <div id="calcSettle"></div>
+      </div>
+      <button class="btn btn-full" onclick="openPdf()" style="margin-bottom:16px">📄 PDF রিপোর্ট ডাউনলোড</button>
+    </div>
+
+    <div class="section" id="sec-settings">
+      <div class="card">
+        <div class="card-title">⚙️ সাধারণ সেটিংস</div>
+        <div class="form-group"><label>ম্যানেজারের নাম</label><input id="setManager"></div>
+        <div class="form-group"><label>মাস</label><input id="setMonth" type="month"></div>
+        <button class="btn btn-full" onclick="saveSettings()">সেভ করুন</button>
+      </div>
+      <div class="card">
+        <div class="card-title">🎨 থিম</div>
+        <div class="theme-grid" id="themeGrid">
+          <div class="theme-opt" data-theme="midnight" onclick="setTheme('midnight')">
+            <div class="to-swatch to-midnight"><div></div><div></div><div></div></div>
+            <div class="to-name">মিডনাইট গোল্ড</div>
+          </div>
+          <div class="theme-opt" data-theme="emerald" onclick="setTheme('emerald')">
+            <div class="to-swatch to-emerald"><div></div><div></div><div></div></div>
+            <div class="to-name">এমারেল্ড ডার্ক</div>
+          </div>
+          <div class="theme-opt" data-theme="royal" onclick="setTheme('royal')">
+            <div class="to-swatch to-royal"><div></div><div></div><div></div></div>
+            <div class="to-name">রয়্যাল পার্পল</div>
+          </div>
+          <div class="theme-opt" data-theme="ocean" onclick="setTheme('ocean')">
+            <div class="to-swatch to-ocean"><div></div><div></div><div></div></div>
+            <div class="to-name">অশেন ব্লু</div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">🍽️ ডিফল্ট মিল রেট</div>
+        <div class="form-group"><label>সকালের ডিফল্ট</label><input id="defS" type="number" step="0.5" placeholder="0.5"></div>
+        <div class="form-group"><label>দুপুরের ডিফল্ট</label><input id="defD" type="number" step="0.5" placeholder="1"></div>
+        <div class="form-group"><label>রাতের ডিফল্ট</label><input id="defR" type="number" step="0.5" placeholder="1"></div>
+        <div class="form-group"><label>Select All-এ মান</label>
+          <select id="defAll">
+            <option value="default">ডিফল্ট রেট</option>
+            <option value="1">সব ১</option>
+            <option value="2">সব ২</option>
+            <option value="0.5">সব ০.৫</option>
+          </select>
+        </div>
+        <button class="btn btn-full" onclick="saveDefaultRates()">সেভ করুন</button>
+      </div>
+      <div class="card">
+        <div class="card-title">⚖️ খরচ ভাগের নিয়ম</div>
+        <div class="form-group"><label>অন্যান্য খরচ (গ্যাস, বিদ্যুৎ, ইন্টারনেট)</label>
+          <div class="radio-group">
+            <div class="radio-opt active" onclick="setDivide(this,'otherDivide','equal')">সমান ভাগ</div>
+            <div class="radio-opt" onclick="setDivide(this,'otherDivide','meal')">মিল অনুপাতে</div>
+          </div>
+          <input type="hidden" id="otherDivide" value="equal">
+        </div>
+        <div class="form-group"><label>খালার বিল</label>
+          <div class="radio-group">
+            <div class="radio-opt active" onclick="setDivide(this,'khalaDivide','equal')">সমান ভাগ</div>
+            <div class="radio-opt" onclick="setDivide(this,'khalaDivide','meal')">মিল অনুপাতে</div>
+          </div>
+          <input type="hidden" id="khalaDivide" value="equal">
+        </div>
+        <button class="btn btn-full" onclick="saveDivideRules()">সেভ করুন</button>
+      </div>
+      <div class="card">
+        <div class="card-title">⚠️ ফান্ড সতর্কতা</div>
+        <div class="form-group"><label>কত টাকার নিচে নামলে warning</label><input id="warnThreshold" type="number" placeholder="1000"></div>
+        <button class="btn btn-full" onclick="saveWarnThreshold()">সেভ করুন</button>
+      </div>
+      <div class="card">
+        <div class="card-title">💾 ডাটা</div>
+        <div class="row" style="margin-bottom:10px">
+          <button class="btn btn-sec" onclick="exportData()">এক্সপোর্ট</button>
+          <button class="btn btn-sec" onclick="importData()">ইমপোর্ট</button>
+        </div>
+        <button class="btn btn-danger btn-full" onclick="resetMonth()">🗑️ এই মাসের ডাটা মুছুন</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-badge">✦ নাফিজের মেস ✦</div>
+</div>
+
+<div id="pdfModal">
+  <div class="pdf-box">
+    <h3>📄 PDF রিপোর্ট</h3>
+    <p style="color:var(--dim);font-size:13px;margin-bottom:16px">অপশন বেছে "প্রিন্ট / PDF" চাপুন। প্রিন্ট ডায়ালগে "Save as PDF" সিলেক্ট করুন।</p>
+    <div class="form-group"><label>রিপোর্টের ধরন</label>
+      <select id="pdfType">
+        <option value="summary">শুধু সারসংক্ষেপ</option>
+        <option value="full">বিস্তারিত সব</option>
+        <option value="custom">কাস্টম</option>
+      </select>
+    </div>
+    <div id="pdfCustom" style="display:none">
+      <div class="form-group"><label>কোন কোন সেকশন</label>
+        <div style="display:flex;flex-direction:column;gap:6px;font-size:13px">
+          <label style="display:flex;gap:8px;align-items:center;color:var(--plat)"><input type="checkbox" id="pc_sum" checked style="width:auto"> সারসংক্ষেপ</label>
+          <label style="display:flex;gap:8px;align-items:center;color:var(--plat)"><input type="checkbox" id="pc_mem" checked style="width:auto"> সদস্য ও জমা</label>
+          <label style="display:flex;gap:8px;align-items:center;color:var(--plat)"><input type="checkbox" id="pc_meal" checked style="width:auto"> মিল</label>
+          <label style="display:flex;gap:8px;align-items:center;color:var(--plat)"><input type="checkbox" id="pc_baz" checked style="width:auto"> বাজার</label>
+          <label style="display:flex;gap:8px;align-items:center;color:var(--plat)"><input type="checkbox" id="pc_oth" checked style="width:auto"> অন্যান্য খরচ</label>
+          <label style="display:flex;gap:8px;align-items:center;color:var(--plat)"><input type="checkbox" id="pc_kha" checked style="width:auto"> খালার বিল</label>
+          <label style="display:flex;gap:8px;align-items:center;color:var(--plat)"><input type="checkbox" id="pc_fin" checked style="width:auto"> জরিমানা</label>
+          <label style="display:flex;gap:8px;align-items:center;color:var(--plat)"><input type="checkbox" id="pc_det" checked style="width:auto"> প্রতি সদস্যের বিস্তারিত</label>
+          <label style="display:flex;gap:8px;align-items:center;color:var(--plat)"><input type="checkbox" id="pc_bal" checked style="width:auto"> ব্যালেন্স সারসংক্ষেপ</label>
+          <label style="display:flex;gap:8px;align-items:center;color:var(--plat)"><input type="checkbox" id="pc_set" checked style="width:auto"> নিষ্পত্তি</label>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <button class="btn btn-sec" onclick="closePdf()">বাতিল</button>
+      <button class="btn" onclick="doPrint()">🖨️ প্রিন্ট / PDF</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>// ===== STATE =====
+const KEY='nafijerMess_v1';
+let state={
+  managerName:'',
+  currentMonth:getCurMonth(),
+  months:{},
+  theme:'midnight',
+  settings:{defS:0.5,defD:1,defR:1,defAll:'default',warnThreshold:1000,depositTarget:0,otherDivide:'equal',khalaDivide:'equal'}
+};
+let toastT;
+
+function getCurMonth(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')}
+function today(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function bn(n){const d=['০','১','২','৩','৪','৫','৬','৭','৮','৯'];return String(n).replace(/[0-9]/g,x=>d[x])}
+function bnMoney(n){return bn(Number(n).toFixed(2))}
+
+function getMonth(){
+  if(!state.months[state.currentMonth]){
+    state.months[state.currentMonth]={members:[],meals:{},bazar:[],cleaning:[],other:[],khala:[],fines:[],deposits:[],notes:[]};
+  }
+  const m=state.months[state.currentMonth];
+  ['members','bazar','cleaning','other','khala','fines','deposits','notes'].forEach(k=>{if(!m[k])m[k]=[]});
+  if(!m.meals)m.meals={};
+  return m;
+}
+
+function monthLabel(k){
+  const[y,m]=k.split('-');
+  const names=['জানুয়ারি','ফেব্রুয়ারি','মার্চ','এপ্রিল','মে','জুন','জুলাই','আগস্ট','সেপ্টেম্বর','অক্টোবর','নভেম্বর','ডিসেম্বর'];
+  return names[parseInt(m)-1]+' '+y;
+}
+
+function save(){localStorage.setItem(KEY,JSON.stringify(state))}
+function load(){const s=localStorage.getItem(KEY);if(s){try{state=JSON.parse(s)}catch(e){}}}
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),2200)}
+
+// ===== THEME =====
+function setTheme(name){
+  state.theme=name;
+  document.body.setAttribute('data-theme',name);
+  save();
+  renderThemePicker();
+  toast('থিম বদলানো হয়েছে ✓');
+}
+function renderThemePicker(){
+  document.querySelectorAll('.theme-opt').forEach(el=>{
+    el.classList.toggle('active',el.dataset.theme===state.theme);
+  });
+}
+
+// ===== RADIO HELPERS =====
+function setSource(el,hiddenId,val){
+  const p=el.parentElement;
+  p.querySelectorAll('.radio-opt').forEach(o=>o.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById(hiddenId).value=val;
+  if(hiddenId==='oSource')document.getElementById('oPocketBy').style.display=val==='pocket'?'block':'none';
+  if(hiddenId==='kSource')document.getElementById('kPocketBy').style.display=val==='pocket'?'block':'none';
+}
+function setDivide(el,hiddenId,val){
+  const p=el.parentElement;
+  p.querySelectorAll('.radio-opt').forEach(o=>o.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById(hiddenId).value=val;
+}
+
+// ===== ENTRY =====
+function enterApp(){
+  const name=document.getElementById('inpManager').value.trim();
+  const month=document.getElementById('inpMonth').value;
+  if(!name){toast('ম্যানেজারের নাম দিন');return}
+  if(!month){toast('মাস নির্বাচন করুন');return}
+  state.managerName=name;state.currentMonth=month;save();
+  document.getElementById('entry').classList.add('hide');
+  setTimeout(()=>{document.getElementById('entry').style.display='none';document.getElementById('app').classList.add('show');initApp();},900);
+}
+
+function initApp(){
+  document.body.setAttribute('data-theme',state.theme||'midnight');
+  document.getElementById('hdManager').textContent='ম্যানেজার: '+state.managerName;
+  document.getElementById('hdMonth').textContent=monthLabel(state.currentMonth);
+  document.getElementById('setManager').value=state.managerName;
+  document.getElementById('setMonth').value=state.currentMonth;
+  document.getElementById('mealDate').value=today();
+  document.getElementById('bDate').value=today();
+  document.getElementById('cDate').value=today();
+  document.getElementById('oDate').value=today();
+  document.getElementById('kDate').value=today();
+  document.getElementById('dDate').value=today();
+  document.getElementById('defS').value=state.settings.defS;
+  document.getElementById('defD').value=state.settings.defD;
+  document.getElementById('defR').value=state.settings.defR;
+  document.getElementById('defAll').value=state.settings.defAll;
+  document.getElementById('warnThreshold').value=state.settings.warnThreshold;
+  document.getElementById('depositTarget').value=state.settings.depositTarget||'';
+  document.getElementById('otherDivide').value=state.settings.otherDivide;
+  document.getElementById('khalaDivide').value=state.settings.khalaDivide;
+  // Set active radio states
+  document.querySelectorAll('.radio-group').forEach(g=>{
+    const hid=g.querySelector('input[type=hidden]');
+    if(!hid)return;
+    g.querySelectorAll('.radio-opt').forEach(o=>{
+      o.classList.remove('active');
+      const oc=o.getAttribute('onclick')||'';
+      if(oc.includes("'"+hid.value+"'"))o.classList.add('active');
+    });
+  });
+  document.querySelectorAll('.tab').forEach(t=>{t.onclick=()=>goTab(t.dataset.tab)});
+  renderThemePicker();
+  renderAll();
+}
+
+function goTab(name){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.tab===name));
+  document.querySelectorAll('.section').forEach(s=>s.classList.toggle('active',s.id==='sec-'+name));
+  if(name==='calc')renderCalc();
+  if(name==='dash'){renderDash();renderWarnings()}
+  if(name==='deposit')renderDeposit();
+  if(name==='settings')renderThemePicker();
+  window.scrollTo(0,0);
+}
+
+function renderAll(){
+  renderMembers();renderMeals();renderBazar();renderCleaning();renderOther();renderKhala();renderFines();
+  renderDeposit();renderNotes();renderDash();renderMealSummary();renderRotations();renderWarnings();
+  const m=getMonth();
+  const opts='<option value="">নির্বাচন করুন</option>'+m.members.map(x=>`<option value="${x.id}">${x.name}</option>`).join('');
+  ['bMember','cMember','oPaidBy','fMember','dMember','kPaidBy'].forEach(id=>{const el=document.getElementById(id);if(el){const v=el.value;el.innerHTML=opts;el.value=v}});
+}
+
+// ===== WARNINGS =====
+function renderWarnings(){
+  const el=document.getElementById('warnArea');
+  const c=calculate();
+  const fund=c.depositTotal-c.fundBazar-c.fundOther-c.fundKhala+c.fundFines;
+  let html='';
+  if(fund<=0){
+    html+=`<div class="warn-banner"><span class="wi">🚨</span><div>মেস ফান্ড শেষ! ব্যালেন্স: ৳${bnMoney(fund)} — জমা বাড়ান</div></div>`;
+  } else if(fund<state.settings.warnThreshold){
+    html+=`<div class="warn-banner"><span class="wi">⚠️</span><div>মেস ফান্ড কম! ব্যালেন্স: ৳${bnMoney(fund)} (সীমা: ৳${bn(state.settings.warnThreshold)})</div></div>`;
+  }
+  el.innerHTML=html;
+}
+
+// ===== DASHBOARD =====
+function renderDash(){
+  const m=getMonth();
+  const bazar=m.bazar.reduce((s,b)=>s+b.amount,0);
+  const other=m.other.reduce((s,o)=>s+o.amount,0);
+  const khala=m.khala.reduce((s,k)=>s+k.amount,0);
+  const c=calculate();
+  document.getElementById('sBazar').textContent=bnMoney(bazar);
+  document.getElementById('sOther').textContent=bnMoney(other+khala);
+  document.getElementById('sMeal').textContent=bn(c.totalBillable);
+  document.getElementById('sRate').textContent=bnMoney(c.mealRate);
+  const fund=c.depositTotal-c.fundBazar-c.fundOther-c.fundKhala+c.fundFines;
+  document.getElementById('sFund').textContent=bnMoney(fund)+' ৳';
+  const fs=document.getElementById('fundStatus');
+  if(fund<=0){fs.textContent='🚨 ফান্ড শেষ!';fs.className='fund-status fund-bad'}
+  else if(fund<state.settings.warnThreshold){fs.textContent='⚠️ কম';fs.className='fund-status fund-warn'}
+  else{fs.textContent='✅ ভালো আছে';fs.className='fund-status fund-ok'}
+  const rotEl=document.getElementById('rotationInfo');
+  if(m.members.length===0){rotEl.innerHTML='<div class="empty">সদস্য যোগ করুন</div>';return}
+  const bc=m.members.map(x=>({name:x.name,c:m.bazar.filter(b=>b.memberId===x.id).length}));
+  const mnB=Math.min(...bc.map(x=>x.c));
+  const nextB=bc.filter(x=>x.c===mnB).map(x=>x.name).join(', ');
+  const cc=m.members.map(x=>({name:x.name,c:m.cleaning.filter(cl=>cl.memberId===x.id).length}));
+  const mnC=Math.min(...cc.map(x=>x.c));
+  const nextC=cc.filter(x=>x.c===mnC).map(x=>x.name).join(', ');
+  rotEl.innerHTML=`<div class="detail-row"><span class="detail-label">🛒 বাজারের পালা</span><span class="detail-value">${nextB}</span></div><div class="detail-row"><span class="detail-label">🧹 পরিষ্কারের পালা</span><span class="detail-value">${nextC}</span></div>`;
+}
+
+// ===== MEMBERS =====
+function addMember(){
+  const name=document.getElementById('mName').value.trim();
+  const fixed=parseFloat(document.getElementById('mFixed').value)||0;
+  if(!name){toast('নাম দিন');return}
+  const m=getMonth();
+  if(m.members.some(x=>x.name.toLowerCase()===name.toLowerCase())){toast('এই নামে সদস্য আছে');return}
+  m.members.push({id:Date.now(),name,fixed});
+  document.getElementById('mName').value='';document.getElementById('mFixed').value='';
+  save();renderAll();toast('সদস্য যোগ ✓');
+}
+function delMember(id){
+  if(!confirm('সদস্য মুছবেন? সব ডাটাও মুছে যাবে।'))return;
+  const m=getMonth();
+  m.members=m.members.filter(x=>x.id!==id);delete m.meals[id];
+  m.bazar=m.bazar.filter(x=>x.memberId!==id);
+  m.cleaning=m.cleaning.filter(x=>x.memberId!==id);
+  m.other=m.other.filter(x=>x.paidBy!==id);
+  m.khala=m.khala.filter(x=>x.paidBy!==id);
+  m.fines=m.fines.filter(x=>x.memberId!==id);
+  m.deposits=m.deposits.filter(x=>x.memberId!==id);
+  save();renderAll();
+}
+function renderMembers(){
+  const m=getMonth();
+  document.getElementById('mCount').textContent=bn(m.members.length);
+  const el=document.getElementById('membersList');
+  if(m.members.length===0){el.innerHTML='<div class="empty"><div class="empty-i">👥</div>এখনো কোনো সদস্য নেই</div>';return}
+  el.innerHTML=m.members.map(x=>`<div class="list-item"><div class="list-main"><div class="list-title">👤 ${x.name}</div><div class="list-meta">${x.fixed?'ফিক্সড: '+bn(x.fixed):'ফিক্সড নেই'}</div></div><button class="btn btn-danger btn-sm" onclick="delMember(${x.id})">✕</button></div>`).join('');
+}
+
+// ===== DEPOSIT =====
+function saveDepositTarget(){
+  state.settings.depositTarget=parseFloat(document.getElementById('depositTarget').value)||0;
+  save();toast('জমার হার সেট ✓');renderDeposit();renderCalc();
+}
+function addDeposit(){
+  const memberId=parseInt(document.getElementById('dMember').value);
+  const amount=parseFloat(document.getElementById('dAmount').value);
+  const date=document.getElementById('dDate').value;
+  if(!memberId){toast('সদস্য নির্বাচন করুন');return}
+  if(!amount||amount<=0){toast('সঠিক টাকা দিন');return}
+  if(!date){toast('তারিখ দিন');return}
+  const m=getMonth();
+  m.deposits.push({id:Date.now(),memberId,amount,date});
+  document.getElementById('dAmount').value='';
+  save();renderAll();renderDeposit();toast('জমা যোগ ✓');
+}
+function delDeposit(id){if(!confirm('মুছবেন?'))return;const m=getMonth();m.deposits=m.deposits.filter(x=>x.id!==id);save();renderAll();renderDeposit()}
+function renderDeposit(){
+  const m=getMonth();
+  const el=document.getElementById('depositList');
+  if(m.deposits.length===0){el.innerHTML='<div class="empty"><div class="empty-i">💵</div>কোনো জমা নেই</div>'}
+  else{el.innerHTML=m.deposits.slice().reverse().map(x=>{const mem=m.members.find(z=>z.id===x.memberId);return `<div class="list-item"><div class="list-main"><div class="list-title">৳${bnMoney(x.amount)}</div><div class="list-meta">${mem?mem.name:'?'} • ${bn(x.date)}</div></div><button class="btn btn-danger btn-sm" onclick="delDeposit(${x.id})">✕</button></div>`}).join('')}
+  const st=document.getElementById('depositStatus');
+  const target=state.settings.depositTarget;
+  if(target<=0){st.innerHTML='<div class="empty">জমার হার সেট করুন</div>';return}
+  if(m.members.length===0){st.innerHTML='<div class="empty">সদস্য নেই</div>';return}
+  st.innerHTML=m.members.map(mem=>{
+    const paid=m.deposits.filter(d=>d.memberId===mem.id).reduce((s,d)=>s+d.amount,0);
+    const ok=paid>=target;
+    return `<div class="detail-row"><span class="detail-label">${ok?'✅':'❌'} ${mem.name}</span><span class="detail-value" style="color:${ok?'var(--ok)':'var(--bad)'}">৳${bnMoney(paid)} / ৳${bn(target)}</span></div>`;
+  }).join('');
+}
+
+// ===== MEALS =====
+function renderMeals(){
+  const m=getMonth();
+  const date=document.getElementById('mealDate').value;
+  const el=document.getElementById('mealsList');
+  if(m.members.length===0){el.innerHTML='<div class="empty">আগে সদস্য যোগ করুন</div>';return}
+  if(!date){el.innerHTML='<div class="empty">তারিখ নির্বাচন করুন</div>';return}
+  el.innerHTML=m.members.map(mem=>{
+    const day=(m.meals[mem.id]&&m.meals[mem.id][date])||{s:state.settings.defS,d:state.settings.defD,r:state.settings.defR,guest:0,off:false};
+    const btn=(type,label)=>{
+      const v=day[type]||0;
+      let cls='meal-tog',txt='০';
+      if(v===1){cls+=' on';txt='১'}else if(v===0.5){cls+=' half';txt='½'}else if(v>=2){cls+=' double';txt=bn(v)}
+      return `<button class="${cls}" onclick="cycleMeal(${mem.id},'${date}','${type}')"><span class="ml">${label}</span>${txt}</button>`;
+    };
+    const isOff=day.off;
+    return `<div class="meal-row" style="${isOff?'opacity:.5':''}">
+      <div class="meal-name">${mem.name}${isOff?' <span style="font-size:10px;color:var(--bad)">(off)</span>':''}</div>
+      <div class="meal-togs">${btn('s','স')}${btn('d','দু')}${btn('r','রা')}</div>
+      <div class="meal-guest">অতিথি <input type="number" min="0" value="${day.guest||0}" onchange="setGuest(${mem.id},'${date}',this.value)"></div>
+      <button class="meal-off-btn" onclick="toggleOff(${mem.id},'${date}')">${isOff?'চালু':'সারাদিন off'}</button>
+    </div>`;
+  }).join('');
+}
+function cycleMeal(mid,date,type){
+  const m=getMonth();
+  if(!m.meals[mid])m.meals[mid]={};
+  if(!m.meals[mid][date])m.meals[mid][date]={s:state.settings.defS,d:state.settings.defD,r:state.settings.defR,guest:0,off:false};
+  if(m.meals[mid][date].off){toast('সারাদিন off আছে, আগে চালু করুন');return}
+  const cur=m.meals[mid][date][type]||0;
+  let next;
+  if(cur===0)next=1;else if(cur===1)next=0.5;else if(cur===0.5)next=2;else next=0;
+  m.meals[mid][date][type]=next;
+  save();renderMeals();renderMealSummary();renderDash();
+}
+function setGuest(mid,date,val){
+  const m=getMonth();
+  if(!m.meals[mid])m.meals[mid]={};
+  if(!m.meals[mid][date])m.meals[mid][date]={s:state.settings.defS,d:state.settings.defD,r:state.settings.defR,guest:0,off:false};
+  m.meals[mid][date].guest=Math.max(0,parseFloat(val)||0);
+  save();renderMealSummary();renderDash();
+}
+function toggleOff(mid,date){
+  const m=getMonth();
+  if(!m.meals[mid])m.meals[mid]={};
+  if(!m.meals[mid][date])m.meals[mid][date]={s:state.settings.defS,d:state.settings.defD,r:state.settings.defR,guest:0,off:false};
+  const d=m.meals[mid][date];
+  if(d.off){d.off=false;d.s=state.settings.defS;d.d=state.settings.defD;d.r=state.settings.defR;d.guest=0}
+  else{d.off=true;d.s=0;d.d=0;d.r=0;d.guest=0}
+  save();renderMeals();renderMealSummary();renderDash();
+}
+function selectAllMeal(type){
+  const m=getMonth();
+  const date=document.getElementById('mealDate').value;
+  if(!date){toast('তারিখ দিন');return}
+  if(m.members.length===0){toast('সদস্য নেই');return}
+  const val=state.settings.defAll==='default'?null:parseFloat(state.settings.defAll);
+  m.members.forEach(mem=>{
+    if(!m.meals[mem.id])m.meals[mem.id]={};
+    if(!m.meals[mem.id][date])m.meals[mem.id][date]={s:state.settings.defS,d:state.settings.defD,r:state.settings.defR,guest:0,off:false};
+    const d=m.meals[mem.id][date];
+    if(d.off)return;
+    if(type==='all'){d.s=val!==null?val:state.settings.defS;d.d=val!==null?val:state.settings.defD;d.r=val!==null?val:state.settings.defR}
+    else{d[type]=val!==null?val:state.settings['def'+type.toUpperCase()]}
+  });
+  save();renderMeals();renderMealSummary();renderDash();toast('সব সেট ✓');
+}
+function allDayOff(){
+  const m=getMonth();
+  const date=document.getElementById('mealDate').value;
+  if(!date){toast('তারিখ দিন');return}
+  if(!confirm('সব সদস্যের সারাদিনের মিল off করবেন?'))return;
+  m.members.forEach(mem=>{
+    if(!m.meals[mem.id])m.meals[mem.id]={};
+    m.meals[mem.id][date]={s:0,d:0,r:0,guest:0,off:true};
+  });
+  save();renderMeals();renderMealSummary();renderDash();toast('সারাদিন off ✓');
+}
+function renderMealSummary(){
+  const m=getMonth();
+  const el=document.getElementById('mealSummary');
+  if(m.members.length===0){el.innerHTML='<div class="empty">সদস্য নেই</div>';return}
+  let rows='',totalBill=0;
+  m.members.forEach(mem=>{
+    let actual=0,guest=0;
+    const mm=m.meals[mem.id]||{};
+    for(const dt in mm){const d=mm[dt];actual+=(d.s||0)+(d.d||0)+(d.r||0);guest+=(d.guest||0)}
+    actual+=guest;
+    const billable=Math.max(actual,mem.fixed||0);
+    totalBill+=billable;
+    rows+=`<div class="detail-row"><span class="detail-label">${mem.name}</span><span class="detail-value">${bn(actual)}${mem.fixed?' (বিল: '+bn(billable)+')':''}</span></div>`;
+  });
+  rows+=`<div class="detail-row" style="border-top:2px solid var(--ac);margin-top:8px;padding-top:10px"><span class="detail-label" style="color:var(--ac);font-weight:800">মোট বিলযোগ্য</span><span class="detail-value" style="color:var(--ac)">${bn(totalBill)}</span></div>`;
+  el.innerHTML=rows;
+}
+
+// ===== BAZAR =====
+function addBazar(){
+  const memberId=parseInt(document.getElementById('bMember').value);
+  const date=document.getElementById('bDate').value;
+  const amount=parseFloat(document.getElementById('bAmount').value);
+  const items=document.getElementById('bItems').value.trim()||'বাজার';
+  const source=document.getElementById('bSource').value;
+  if(!memberId){toast('কে করল নির্বাচন করুন');return}
+  if(!date){toast('তারিখ দিন');return}
+  if(!amount||amount<=0){toast('সঠিক টাকা দিন');return}
+  const m=getMonth();
+  m.bazar.push({id:Date.now(),memberId,date,amount,items,source});
+  document.getElementById('bAmount').value='';document.getElementById('bItems').value='';
+  save();renderAll();renderBazar();toast('বাজার যোগ ✓');
+}
+function delBazar(id){if(!confirm('মুছবেন?'))return;const m=getMonth();m.bazar=m.bazar.filter(x=>x.id!==id);save();renderAll();renderBazar()}
+function renderBazar(){
+  const m=getMonth();
+  const el=document.getElementById('bazarList');
+  if(m.bazar.length===0){el.innerHTML='<div class="empty"><div class="empty-i">🛒</div>কোনো বাজার নেই</div>'}
+  else{el.innerHTML=m.bazar.slice().reverse().map(x=>{const mem=m.members.find(z=>z.id===x.memberId);const tag=x.source==='pocket'?'<span class="tag tag-pocket">পকেট</span>':'<span class="tag tag-fund">ফান্ড</span>';return `<div class="list-item"><div class="list-main"><div class="list-title">৳${bnMoney(x.amount)} — ${x.items}</div><div class="list-meta">${mem?mem.name:'?'} • ${bn(x.date)} ${tag}</div></div><button class="btn btn-danger btn-sm" onclick="delBazar(${x.id})">✕</button></div>`}).join('')}
+  const rotEl=document.getElementById('bazarRotation');
+  if(m.members.length===0){rotEl.innerHTML='<div class="empty">সদস্য নেই</div>';return}
+  const counts=m.members.map(x=>({name:x.name,c:m.bazar.filter(b=>b.memberId===x.id).length}));
+  const mn=Math.min(...counts.map(x=>x.c));
+  rotEl.innerHTML=counts.map(x=>`<div class="detail-row"><span class="detail-label">${x.name}${x.c===mn?'<span class="rot-badge">পালা</span>':''}</span><span class="detail-value">${bn(x.c)} বার</span></div>`).join('');
+}
+
+// ===== CLEANING =====
+function addCleaning(){
+  const type=document.getElementById('cType').value;
+  const memberId=parseInt(document.getElementById('cMember').value);
+  const date=document.getElementById('cDate').value;
+  if(!memberId){toast('কে করল নির্বাচন করুন');return}
+  if(!date){toast('তারিখ দিন');return}
+  const m=getMonth();
+  m.cleaning.push({id:Date.now(),type,memberId,date});
+  save();renderAll();renderCleaning();renderRotations();toast('যোগ ✓');
+}
+function delCleaning(id){if(!confirm('মুছবেন?'))return;const m=getMonth();m.cleaning=m.cleaning.filter(x=>x.id!==id);save();renderAll();renderCleaning();renderRotations()}
+function renderCleaning(){
+  const m=getMonth();
+  const el=document.getElementById('cleaningList');
+  if(m.cleaning.length===0){el.innerHTML='<div class="empty"><div class="empty-i">🧹</div>কোনো রেকর্ড নেই</div>'}
+  else{el.innerHTML=m.cleaning.slice().reverse().map(x=>{const mem=m.members.find(z=>z.id===x.memberId);return `<div class="list-item"><div class="list-main"><div class="list-title">${x.type}</div><div class="list-meta">${mem?mem.name:'?'} • ${bn(x.date)}</div></div><button class="btn btn-danger btn-sm" onclick="delCleaning(${x.id})">✕</button></div>`}).join('')}
+  renderRotations();
+}
+function renderRotations(){
+  const m=getMonth();
+  const el=document.getElementById('cleanRot');
+  if(m.members.length===0){el.innerHTML='<div class="empty">সদস্য নেই</div>';return}
+  const types=['বাথরুম','রান্নাঘর','কমন রুম','বারান্দা'];
+  let html='';
+  types.forEach(t=>{
+    const counts=m.members.map(x=>({name:x.name,c:m.cleaning.filter(cl=>cl.memberId===x.id&&cl.type===t).length}));
+    const mn=Math.min(...counts.map(x=>x.c));
+    html+=`<div class="detail-row"><span class="detail-label">${t}</span><span class="detail-value">${counts.map(x=>`${x.name}(${bn(x.c)})${x.c===mn?'<span class="rot-badge">পালা</span>':''}`).join(', ')}</span></div>`;
+  });
+  el.innerHTML=html;
+}
+
+// ===== OTHER =====
+function addOther(){
+  const type=document.getElementById('oType').value;
+  const name=document.getElementById('oName').value.trim()||type;
+  const amount=parseFloat(document.getElementById('oAmount').value);
+  const date=document.getElementById('oDate').value;
+  const source=document.getElementById('oSource').value;
+  const paidBy=source==='pocket'?parseInt(document.getElementById('oPaidBy').value):0;
+  if(!amount||amount<=0){toast('সঠিক টাকা দিন');return}
+  if(!date){toast('তারিখ দিন');return}
+  if(source==='pocket'&&!paidBy){toast('কে দিল নির্বাচন করুন');return}
+  const m=getMonth();
+  m.other.push({id:Date.now(),type,name,amount,date,source,paidBy});
+  document.getElementById('oName').value='';document.getElementById('oAmount').value='';
+  save();renderAll();renderOther();toast('খরচ যোগ ✓');
+}
+function delOther(id){if(!confirm('মুছবেন?'))return;const m=getMonth();m.other=m.other.filter(x=>x.id!==id);save();renderAll();renderOther()}
+function renderOther(){
+  const m=getMonth();
+  const el=document.getElementById('otherList');
+  if(m.other.length===0){el.innerHTML='<div class="empty"><div class="empty-i">💡</div>কোনো খরচ নেই</div>';return}
+  const icons={other:'💡',internet:'🌐',gas:'🔥',electricity:'⚡',water:'💧'};
+  el.innerHTML=m.other.slice().reverse().map(x=>{const mem=x.paidBy?m.members.find(z=>z.id===x.paidBy):null;const tag=x.source==='pocket'?'<span class="tag tag-pocket">পকেট</span>':'<span class="tag tag-fund">ফান্ড</span>';return `<div class="list-item"><div class="list-main"><div class="list-title">${icons[x.type]||'💡'} ৳${bnMoney(x.amount)} — ${x.name}</div><div class="list-meta">${bn(x.date)} ${tag}${mem?' • '+mem.name:''}</div></div><button class="btn btn-danger btn-sm" onclick="delOther(${x.id})">✕</button></div>`}).join('');
+}
+
+// ===== KHALA =====
+function addKhala(){
+  const date=document.getElementById('kDate').value;
+  const amount=parseFloat(document.getElementById('kAmount').value);
+  const source=document.getElementById('kSource').value;
+  const paidBy=source==='pocket'?parseInt(document.getElementById('kPaidBy').value):0;
+  if(!amount||amount<=0){toast('সঠিক টাকা দিন');return}
+  if(!date){toast('তারিখ দিন');return}
+  if(source==='pocket'&&!paidBy){toast('কে দিল নির্বাচন করুন');return}
+  const m=getMonth();
+  m.khala.push({id:Date.now(),date,amount,source,paidBy});
+  document.getElementById('kAmount').value='';
+  save();renderAll();renderKhala();toast('খালার বিল যোগ ✓');
+}
+function delKhala(id){if(!confirm('মুছবেন?'))return;const m=getMonth();m.khala=m.khala.filter(x=>x.id!==id);save();renderAll();renderKhala()}
+function renderKhala(){
+  const m=getMonth();
+  const el=document.getElementById('khalaList');
+  if(m.khala.length===0){el.innerHTML='<div class="empty"><div class="empty-i">👩‍🍳</div>কোনো বিল নেই</div>';return}
+  el.innerHTML=m.khala.slice().reverse().map(x=>{const mem=x.paidBy?m.members.find(z=>z.id===x.paidBy):null;const tag=x.source==='pocket'?'<span class="tag tag-pocket">পকেট</span>':'<span class="tag tag-fund">ফান্ড</span>';return `<div class="list-item"><div class="list-main"><div class="list-title">👩‍🍳 ৳${bnMoney(x.amount)}</div><div class="list-meta">${bn(x.date)} ${tag}${mem?' • '+mem.name:''}</div></div><button class="btn btn-danger btn-sm" onclick="delKhala(${x.id})">✕</button></div>`}).join('');
+}
+
+// ===== FINES =====
+function addFine(){
+  const memberId=parseInt(document.getElementById('fMember').value);
+  const amount=parseFloat(document.getElementById('fAmount').value);
+  const reason=document.getElementById('fReason').value.trim()||'জরিমানা';
+  const mode=document.getElementById('fMode').value;
+  if(!memberId){toast('সদস্য নির্বাচন করুন');return}
+  if(!amount||amount<=0){toast('সঠিক টাকা দিন');return}
+  const m=getMonth();
+  m.fines.push({id:Date.now(),memberId,amount,reason,mode});
+  document.getElementById('fAmount').value='';document.getElementById('fReason').value='';
+  save();renderAll();renderFines();toast('জরিমানা যোগ ✓');
+}
+function delFine(id){if(!confirm('মুছবেন?'))return;const m=getMonth();m.fines=m.fines.filter(x=>x.id!==id);save();renderAll();renderFines()}
+function renderFines(){
+  const m=getMonth();
+  const el=document.getElementById('finesList');
+  if(m.fines.length===0){el.innerHTML='<div class="empty"><div class="empty-i">⚠️</div>কোনো জরিমানা নেই</div>';return}
+  el.innerHTML=m.fines.slice().reverse().map(x=>{const mem=m.members.find(z=>z.id===x.memberId);return `<div class="list-item"><div class="list-main"><div class="list-title">৳${bnMoney(x.amount)} — ${x.reason}</div><div class="list-meta">${mem?mem.name:'?'} • ${x.mode==='meal'?'মিল পুল':'ফান্ড'}</div></div><button class="btn btn-danger btn-sm" onclick="delFine(${x.id})">✕</button></div>`}).join('');
+}
+
+// ===== NOTES =====
+function saveNote(){
+  const t=document.getElementById('noteText').value.trim();
+  if(!t){toast('নোট লিখুন');return}
+  const m=getMonth();
+  m.notes.push({id:Date.now(),text:t,date:new Date().toLocaleString('bn-BD')});
+  document.getElementById('noteText').value='';
+  save();renderNotes();toast('নোট সেভ ✓');
+}
+function delNote(id){if(!confirm('মুছবেন?'))return;const m=getMonth();m.notes=m.notes.filter(x=>x.id!==id);save();renderNotes()}
+function renderNotes(){
+  const m=getMonth();
+  const el=document.getElementById('notesList');
+  if(m.notes.length===0){el.innerHTML='<div class="empty"><div class="empty-i">📝</div>কোনো নোট নেই</div>';return}
+  el.innerHTML=m.notes.slice().reverse().map(x=>`<div class="list-item"><div class="list-main"><div class="list-title" style="white-space:pre-wrap;font-weight:400">${x.text}</div><div class="list-meta">${x.date}</div></div><button class="btn btn-danger btn-sm" onclick="delNote(${x.id})">✕</button></div>`).join('');
+}
+
+// ===== CALC =====
+function calculate(){
+  const m=getMonth();
+  const numM=m.members.length;
+  const bazarTotal=m.bazar.reduce((s,b)=>s+b.amount,0);
+  const fundBazar=m.bazar.filter(b=>b.source==='fund').reduce((s,b)=>s+b.amount,0);
+  const otherTotal=m.other.reduce((s,o)=>s+o.amount,0);
+  const fundOther=m.other.filter(o=>o.source==='fund').reduce((s,o)=>s+o.amount,0);
+  const khalaTotal=m.khala.reduce((s,k)=>s+k.amount,0);
+  const fundKhala=m.khala.filter(k=>k.source==='fund').reduce((s,k)=>s+k.amount,0);
+  const depositTotal=m.deposits.reduce((s,d)=>s+d.amount,0);
+  const finesTotal=m.fines.reduce((s,f)=>s+f.amount,0);
+  const mealFines=m.fines.filter(f=>f.mode==='meal').reduce((s,f)=>s+f.amount,0);
+  const fundFines=m.fines.filter(f=>f.mode==='fund').reduce((s,f)=>s+f.amount,0);
+  const memberData=m.members.map(mem=>{
+    let actual=0;
+    const mm=m.meals[mem.id]||{};
+    for(const dt in mm){const d=mm[dt];actual+=(d.s||0)+(d.d||0)+(d.r||0)+(d.guest||0)}
+    const billable=Math.max(actual,mem.fixed||0);
+    const deposited=m.deposits.filter(d=>d.memberId===mem.id).reduce((s,d)=>s+d.amount,0);
+    const pocketBazar=m.bazar.filter(b=>b.source==='pocket'&&b.memberId===mem.id).reduce((s,b)=>s+b.amount,0);
+    const pocketOther=m.other.filter(o=>o.source==='pocket'&&o.paidBy===mem.id).reduce((s,o)=>s+o.amount,0);
+    const pocketKhala=m.khala.filter(k=>k.source==='pocket'&&k.paidBy===mem.id).reduce((s,k)=>s+k.amount,0);
+    const theirFines=m.fines.filter(f=>f.memberId===mem.id).reduce((s,f)=>s+f.amount,0);
+    return {id:mem.id,name:mem.name,fixed:mem.fixed,actual,billable,deposited,pocketBazar,pocketOther,pocketKhala,theirFines};
+  });
+  const totalBillable=memberData.reduce((s,x)=>s+x.billable,0);
+  const mealRate=totalBillable>0?bazarTotal/totalBillable:0;
+  const otherDivRule=state.settings.otherDivide;
+  const khalaDivRule=state.settings.khalaDivide;
+  memberData.forEach(x=>{
+    x.mealCost=x.billable*mealRate;
+    if(otherDivRule==='equal'){x.otherShare=numM>0?otherTotal/numM:0}
+    else{x.otherShare=totalBillable>0?otherTotal*(x.billable/totalBillable):0}
+    if(khalaDivRule==='equal'){x.khalaShare=numM>0?khalaTotal/numM:0}
+    else{x.khalaShare=totalBillable>0?khalaTotal*(x.billable/totalBillable):0}
+    x.totalOwed=x.mealCost+x.otherShare+x.khalaShare+x.theirFines;
+    x.totalPaid=x.deposited+x.pocketBazar+x.pocketOther+x.pocketKhala;
+    x.balance=x.totalPaid-x.totalOwed;
+  });
+  const creditors=memberData.filter(x=>x.balance>0.01).map(x=>({name:x.name,bal:x.balance}));
+  const debtors=memberData.filter(x=>x.balance<-0.01).map(x=>({name:x.name,bal:-x.balance}));
+  const settles=[];let i=0,j=0;
+  while(i<debtors.length&&j<creditors.length){
+    const amt=Math.min(debtors[i].bal,creditors[j].bal);
+    settles.push({from:debtors[i].name,to:creditors[j].name,amount:amt});
+    debtors[i].bal-=amt;creditors[j].bal-=amt;
+    if(debtors[i].bal<0.01)i++;if(creditors[j].bal<0.01)j++;
+  }
+  return {memberData,mealRate,bazarTotal,fundBazar,otherTotal,fundOther,khalaTotal,fundKhala,depositTotal,finesTotal,mealFines,fundFines,totalBillable,settles,numM};
+}
+function renderCalc(){
+  const c=calculate();
+  const fund=c.depositTotal-c.fundBazar-c.fundOther-c.fundKhala+c.fundFines;
+  document.getElementById('calcSummary').innerHTML=`
+    <div class="detail-row"><span class="detail-label">মোট বাজার</span><span class="detail-value">৳${bnMoney(c.bazarTotal)}</span></div>
+    <div class="detail-row"><span class="detail-label">মোট অন্যান্য খরচ</span><span class="detail-value">৳${bnMoney(c.otherTotal)}</span></div>
+    <div class="detail-row"><span class="detail-label">মোট খালার বিল</span><span class="detail-value">৳${bnMoney(c.khalaTotal)}</span></div>
+    <div class="detail-row"><span class="detail-label">মোট জমা</span><span class="detail-value">৳${bnMoney(c.depositTotal)}</span></div>
+    <div class="detail-row"><span class="detail-label">মোট জরিমানা</span><span class="detail-value">৳${bnMoney(c.finesTotal)}</span></div>
+    <div class="detail-row"><span class="detail-label">বিলযোগ্য মিল</span><span class="detail-value">${bn(c.totalBillable)}</span></div>
+    <div class="detail-row"><span class="detail-label">মিল রেট</span><span class="detail-value" style="color:var(--ac)">৳${bnMoney(c.mealRate)}</span></div>
+    <div class="detail-row"><span class="detail-label">অন্যান্য ভাগ</span><span class="detail-value">${state.settings.otherDivide==='equal'?'সমান':'মিল অনুপাতে'}</span></div>
+    <div class="detail-row"><span class="detail-label">খালার বিল ভাগ</span><span class="detail-value">${state.settings.khalaDivide==='equal'?'সমান':'মিল অনুপাতে'}</span></div>
+    <div class="detail-row" style="border-top:2px solid var(--ac);margin-top:6px;padding-top:10px"><span class="detail-label" style="color:var(--ac);font-weight:800">মেস ফান্ড</span><span class="detail-value" style="color:${fund>=0?'var(--ok)':'var(--bad)'}">৳${bnMoney(fund)}</span></div>`;
+  const mEl=document.getElementById('calcMembers');
+  if(c.memberData.length===0){mEl.innerHTML='<div class="empty">সদস্য নেই</div>'}
+  else{mEl.innerHTML=c.memberData.map(x=>{let cls='bal-zero';if(x.balance>0.01)cls='bal-pos';else if(x.balance<-0.01)cls='bal-neg';const sign=x.balance>0?'+':'';return `<div class="bal-row ${cls}"><div style="flex:1"><div>${x.name}</div><div style="font-size:10px;opacity:.7;font-weight:400;margin-top:2px">মিল: ${bn(x.billable)} • মিল খরচ: ৳${bnMoney(x.mealCost)} • অন্য: ৳${bnMoney(x.otherShare+x.khalaShare)} • দিয়েছে: ৳${bnMoney(x.totalPaid)}</div></div><div style="text-align:right"><div>${sign}৳${bnMoney(Math.abs(x.balance))}</div><div style="font-size:10px;opacity:.7;font-weight:400">${x.balance>0.01?'পাবে':x.balance<-0.01?'দেবে':'সমতা'}</div></div></div>`}).join('')}
+  const sEl=document.getElementById('calcSettle');
+  if(c.settles.length===0){sEl.innerHTML='<div class="empty"><div class="empty-i">✅</div>সবাই সমান!</div>'}
+  else{sEl.innerHTML=c.settles.map(s=>`<div class="settle-row"><span><b>${s.from}</b> → <b>${s.to}</b></span><span class="settle-amt">৳${bnMoney(s.amount)}</span></div>`).join('')}
+}
+
+// ===== SETTINGS =====
+function saveSettings(){
+  const name=document.getElementById('setManager').value.trim();
+  const month=document.getElementById('setMonth').value;
+  if(!name){toast('নাম দিন');return}
+  if(!month){toast('মাস নির্বাচন করুন');return}
+  state.managerName=name;state.currentMonth=month;save();
+  document.getElementById('hdManager').textContent='ম্যানেজার: '+state.managerName;
+  document.getElementById('hdMonth').textContent=monthLabel(state.currentMonth);
+  renderAll();toast('সেভ ✓');
+}
+function saveDefaultRates(){
+  state.settings.defS=parseFloat(document.getElementById('defS').value)||0.5;
+  state.settings.defD=parseFloat(document.getElementById('defD').value)||1;
+  state.settings.defR=parseFloat(document.getElementById('defR').value)||1;
+  state.settings.defAll=document.getElementById('defAll').value;
+  save();toast('ডিফল্ট রেট সেভ ✓');
+}
+function saveDivideRules(){
+  state.settings.otherDivide=document.getElementById('otherDivide').value;
+  state.settings.khalaDivide=document.getElementById('khalaDivide').value;
+  save();renderCalc();toast('ভাগের নিয়ম সেভ ✓');
+}
+function saveWarnThreshold(){
+  state.settings.warnThreshold=parseFloat(document.getElementById('warnThreshold').value)||1000;
+  save();renderWarnings();renderDash();toast('সেভ ✓');
+}
+function exportData(){
+  const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='nafijer-mess-'+state.currentMonth+'.json';a.click();toast('এক্সপোর্ট ✓');
+}
+function importData(){
+  const inp=document.createElement('input');inp.type='file';inp.accept='.json';
+  inp.onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{try{const d=JSON.parse(ev.target.result);if(d.managerName&&d.months){state=d;save();initApp();toast('ইমপোর্ট ✓')}else toast('ভুল ফাইল')}catch(err){toast('ফাইল পড়া যায়নি')}};r.readAsText(f)};
+  inp.click();
+}
+function resetMonth(){
+  if(!confirm('এই মাসের সব ডাটা মুছবেন?'))return;
+  if(!confirm('একদম নিশ্চিত?'))return;
+  delete state.months[state.currentMonth];save();renderAll();toast('মুছে ফেলা হয়েছে');
+}
+
+// ===== PDF =====
+function openPdf(){
+  document.getElementById('pdfModal').classList.add('show');
+  document.getElementById('pdfType').onchange=function(){
+    document.getElementById('pdfCustom').style.display=this.value==='custom'?'block':'none';
+  };
+}
+function closePdf(){document.getElementById('pdfModal').classList.remove('show')}
+function doPrint(){
+  const type=document.getElementById('pdfType').value;
+  const m=getMonth();
+  const c=calculate();
+  const fund=c.depositTotal-c.fundBazar-c.fundOther-c.fundKhala+c.fundFines;
+  let html='<html><head><meta charset="UTF-8"><title>নাফিজের মেস - রিপোর্ট</title><style>body{font-family:sans-serif;padding:30px;color:#000}h1{font-size:24px;margin-bottom:6px}h2{font-size:16px;margin:20px 0 8px;border-bottom:2px solid #333;padding-bottom:4px}table{width:100%;border-collapse:collapse;margin-bottom:16px;font-size:12px}th,td{border:1px solid #999;padding:6px 8px;text-align:left}th{background:#eee;font-weight:bold}.row{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px dashed #ccc}.total{font-weight:bold;border-top:2px solid #333;padding-top:8px;margin-top:8px}.header{text-align:center;margin-bottom:20px;border-bottom:3px double #333;padding-bottom:12px}.pos{color:#16a34a;font-weight:bold}.neg{color:#dc2626;font-weight:bold}</style></head><body>';
+  html+=`<div class="header"><h1>🍛 নাফিজের মেস</h1><p>মাস: ${monthLabel(state.currentMonth)} | ম্যানেজার: ${state.managerName}</p><p style="font-size:11px;color:#666">রিপোর্ট: ${new Date().toLocaleString('bn-BD')}</p></div>`;
+  const showS=type==='full'||(type==='custom'&&document.getElementById('pc_sum').checked);
+  const showM=type==='full'||(type==='custom'&&document.getElementById('pc_mem').checked);
+  const showMeal=type==='full'||(type==='custom'&&document.getElementById('pc_meal').checked);
+  const showB=type==='full'||(type==='custom'&&document.getElementById('pc_baz').checked);
+  const showO=type==='full'||(type==='custom'&&document.getElementById('pc_oth').checked);
+  const showK=type==='full'||(type==='custom'&&document.getElementById('pc_kha').checked);
+  const showF=type==='full'||(type==='custom'&&document.getElementById('pc_fin').checked);
+  const showDetail=type==='full'||(type==='custom'&&document.getElementById('pc_det').checked);
+  const showBal=type==='full'||(type==='custom'&&document.getElementById('pc_bal').checked);
+  const showSet=type==='full'||(type==='custom'&&document.getElementById('pc_set').checked);
+
+  if(showS){
+    html+=`<h2>সারসংক্ষেপ</h2>
+    <div class="row"><span>মোট বাজার</span><span>৳${bnMoney(c.bazarTotal)}</span></div>
+    <div class="row"><span>মোট অন্যান্য খরচ</span><span>৳${bnMoney(c.otherTotal)}</span></div>
+    <div class="row"><span>মোট খালার বিল</span><span>৳${bnMoney(c.khalaTotal)}</span></div>
+    <div class="row"><span>মোট জমা</span><span>৳${bnMoney(c.depositTotal)}</span></div>
+    <div class="row"><span>মোট জরিমানা</span><span>৳${bnMoney(c.finesTotal)}</span></div>
+    <div class="row"><span>বিলযোগ্য মিল</span><span>${bn(c.totalBillable)}</span></div>
+    <div class="row"><span>মিল রেট</span><span>৳${bnMoney(c.mealRate)}</span></div>
+    <div class="row"><span>অন্যান্য ভাগ</span><span>${state.settings.otherDivide==='equal'?'সমান':'মিল অনুপাতে'}</span></div>
+    <div class="row"><span>খালার বিল ভাগ</span><span>${state.settings.khalaDivide==='equal'?'সমান':'মিল অনুপাতে'}</span></div>
+    <div class="row total"><span>মেস ফান্ড</span><span>৳${bnMoney(fund)}</span></div>`;
+  }
+  if(showM){
+    html+=`<h2>সদস্য ও জমা</h2><table><tr><th>নাম</th><th>ফিক্সড</th><th>জমা</th></tr>`;
+    m.members.forEach(mem=>{const dep=m.deposits.filter(d=>d.memberId===mem.id).reduce((s,d)=>s+d.amount,0);html+=`<tr><td>${mem.name}</td><td>${mem.fixed?bn(mem.fixed):'-'}</td><td>৳${bnMoney(dep)}</td></tr>`});
+    html+='</table>';
+  }
+  if(showMeal){
+    html+=`<h2>মিল</h2><table><tr><th>নাম</th><th>আসল</th><th>বিলযোগ্য</th><th>খরচ</th></tr>`;
+    c.memberData.forEach(x=>{html+=`<tr><td>${x.name}</td><td>${bn(x.actual)}</td><td>${bn(x.billable)}</td><td>৳${bnMoney(x.mealCost)}</td></tr>`});
+    html+='</table>';
+  }
+  if(showB){
+    html+=`<h2>বাজার</h2><table><tr><th>তারিখ</th><th>সদস্য</th><th>বিবরণ</th><th>টাকা</th><th>উৎস</th></tr>`;
+    m.bazar.forEach(b=>{const mem=m.members.find(z=>z.id===b.memberId);html+=`<tr><td>${bn(b.date)}</td><td>${mem?mem.name:'?'}</td><td>${b.items}</td><td>৳${bnMoney(b.amount)}</td><td>${b.source==='pocket'?'পকেট':'ফান্ড'}</td></tr>`});
+    html+='</table>';
+  }
+  if(showO){
+    html+=`<h2>অন্যান্য খরচ</h2><table><tr><th>তারিখ</th><th>নাম</th><th>টাকা</th><th>উৎস</th></tr>`;
+    m.other.forEach(o=>{const mem=o.paidBy?m.members.find(z=>z.id===o.paidBy):null;html+=`<tr><td>${bn(o.date)}</td><td>${o.name}</td><td>৳${bnMoney(o.amount)}</td><td>${o.source==='pocket'?'পকেট'+(mem?' - '+mem.name:''):'ফান্ড'}</td></tr>`});
+    html+='</table>';
+  }
+  if(showK){
+    html+=`<h2>খালার বিল</h2><table><tr><th>তারিখ</th><th>টাকা</th><th>উৎস</th></tr>`;
+    m.khala.forEach(k=>{const mem=k.paidBy?m.members.find(z=>z.id===k.paidBy):null;html+=`<tr><td>${bn(k.date)}</td><td>৳${bnMoney(k.amount)}</td><td>${k.source==='pocket'?'পকেট'+(mem?' - '+mem.name:''):'ফান্ড'}</td></tr>`});
+    html+='</table>';
+  }
+  if(showF){
+    html+=`<h2>জরিমানা</h2><table><tr><th>সদস্য</th><th>কারণ</th><th>কোথায়</th><th>টাকা</th></tr>`;
+    m.fines.forEach(f=>{const mem=m.members.find(z=>z.id===f.memberId);html+=`<tr><td>${mem?mem.name:'?'}</td><td>${f.reason}</td><td>${f.mode==='meal'?'মিল পুল':'ফান্ড'}</td><td>৳${bnMoney(f.amount)}</td></tr>`});
+    html+='</table>';
+  }
+  if(showDetail){
+    html+=`<h2>প্রতি সদস্যের বিস্তারিত হিসাব</h2>
+    <table>
+      <tr><th>নাম</th><th>মিল</th><th>মিল খরচ</th><th>অন্য ভাগ</th><th>জরিমানা</th><th>মোট দেবে</th><th>জমা</th><th>পকেট</th><th>মোট দিয়েছে</th></tr>`;
+    c.memberData.forEach(x=>{
+      html+=`<tr>
+        <td><b>${x.name}</b></td>
+        <td>${bn(x.billable)}</td>
+        <td>৳${bnMoney(x.mealCost)}</td>
+        <td>৳${bnMoney(x.otherShare+x.khalaShare)}</td>
+        <td>৳${bnMoney(x.theirFines)}</td>
+        <td><b>৳${bnMoney(x.totalOwed)}</b></td>
+        <td>৳${bnMoney(x.deposited)}</td>
+        <td>৳${bnMoney(x.pocketBazar+x.pocketOther+x.pocketKhala)}</td>
+        <td><b>৳${bnMoney(x.totalPaid)}</b></td>
+      </tr>`;
+    });
+    html+='</table>';
+  }
+  if(showBal){
+    html+=`<h2>কে কত টাকা পাবে / দেবে</h2>
+    <table><tr><th>নাম</th><th>ব্যালেন্স</th><th>অবস্থা</th></tr>`;
+    c.memberData.forEach(x=>{
+      const sign=x.balance>0?'+':'';
+      const status=x.balance>0.01?'পাবে':x.balance<-0.01?'দেবে':'সমতা';
+      const cls=x.balance>0.01?'pos':x.balance<-0.01?'neg':'';
+      html+=`<tr><td><b>${x.name}</b></td><td class="${cls}">${sign}৳${bnMoney(Math.abs(x.balance))}</td><td class="${cls}">${status}</td></tr>`;
+    });
+    html+='</table>';
+  }
+  if(showSet){
+    html+=`<h2>কে কাকে কত দেবে (নিষ্পত্তি)</h2>`;
+    if(c.settles.length===0){html+='<p>সবাই সমান ✅ কোনো লেনদেন নেই</p>'}
+    else{
+      html+='<table><tr><th>দেবে</th><th>পাবে</th><th>টাকা</th></tr>';
+      c.settles.forEach(s=>{html+=`<tr><td>${s.from}</td><td>${s.to}</td><td><b>৳${bnMoney(s.amount)}</b></td></tr>`});
+      html+='</table>';
+    }
+  }
+  html+='</body></html>';
+  const w=window.open('','_blank');
+  w.document.write(html);w.document.close();
+  setTimeout(()=>{w.print()},500);
+  closePdf();
+}
+
+// ===== BOOT =====
+load();
+document.body.setAttribute('data-theme',state.theme||'midnight');
+document.getElementById('inpManager').value=state.managerName||'';
+document.getElementById('inpMonth').value=state.currentMonth||getCurMonth();
+</script>
+</body>
+</html>
